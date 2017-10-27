@@ -1,5 +1,3 @@
-DEBUG    = -g
-CXXFLAGS = -Wall $(DEBUG) -std=c++11
 OBJS     = main.o gpwriter.o header.o iohandler.o timing.o track.o
 
 midiorgan : $(OBJS)
@@ -15,5 +13,7 @@ timing.o : timing.cpp timing.h
 		cc -c timing.cpp
 track.o: track.cpp track.h
 		cc -c track.cpp
-clean :
-	rm midiorgan main.o gpwriter.o header.o iohandler.o timing.o track.o
+
+.PHONY : clean
+clean:
+	rm midiorgan $(OBJS)
