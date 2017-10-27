@@ -1,4 +1,6 @@
 #include "iohandler.h"
+#include "track.h"
+
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -12,8 +14,10 @@ void IOHandler::start(){
 	std::string input;
 	std::getline(std::cin, input);
 	std::stringstream(input) >> filename;
-	std::cout << "thanks" << std::endl;
+	std::cout << filename << "is being read";
 
+	Track track;
+	track.readMidi(filename);
 }
 
 }

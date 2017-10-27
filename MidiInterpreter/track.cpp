@@ -1,9 +1,16 @@
 #include "track.h"
 #include "timing.h"
+
+#include <MidiFile.h>
+#include <Options.h>
 #include <vector>
 
 namespace midi {
 
+	std::vector<processed_midi> Parser::readMidi(std::string& filename){
+		
+	}
+	
 	void Parser::startTiming(){
 		std::vector<processed_midi> p_midis;
 		for(int i = 0; i < p_midis.size(); ++i){
