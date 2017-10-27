@@ -12,8 +12,6 @@ class Parser{
 		int command [2];				
 	} ;
 
-	int midi_length;
-
 	void startTiming();	
 };
 

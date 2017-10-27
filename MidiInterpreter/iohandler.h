@@ -5,6 +5,9 @@ namespace midi{
 
 class IOHandler{
 
+	public:
+	void start();
+
 };
 
 }
