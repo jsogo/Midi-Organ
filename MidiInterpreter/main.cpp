@@ -1,3 +1,6 @@
+#include "iohandler.h"
+
 int main(){
-	return 0;
+	midi::IOHandler iohandler;
+	iohandler.start();
 }

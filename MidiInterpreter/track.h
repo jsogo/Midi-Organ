@@ -2,6 +2,8 @@
 #define PARSER_H_
 
 #include <chrono>
+#include <vector>
+#include <string>
 
 namespace midi{
 
@@ -11,10 +13,8 @@ class Parser{
 		std::chrono::nanoseconds delta_t;
 		int command [2];				
 	} ;
-
-	int midi_length;
-
-	void startTiming();	
+	
+	void readMidi(std::string& filename); 
 };
 
 }
