@@ -12,21 +12,35 @@ namespace midi {
 		MidiFile midifile;
 		midifile.read(filename);
 
-		std::cout << "trying to do the thing" << std::endl;
+		std::cout << filename << std::endl;
+
+		std::cout << "status: " << midifile.status() << std::endl;
+
 		if(!midifile.status()){
-			std::cerr << "Error reading MIDI file " << filename << std::endl;	
+			std::cout << "its not working" << std::endl;
+			std::cerr << "Error reading MIDI file " << "one.mid" << std::endl;	
 		}
 		midifile.joinTracks();
+		std::cout << "size: " << midifile[0].size() << std::endl;
+		
 		int track = 0;
-		for(int i = 0; i < midifile[track].size(); i++){
+		for(int event = 0; event < midifile[track].size(); event++){
 			int command;
-			if(midifile[track][i].isNoteOn()){
+			if(midifile[track][event].isNoteOn()){
 				command = 1;
+				for(int i = 0; i < midifile[track][event].size(); i++){
+					std::cout << std::hex << (int)midifile[track][event][i] << ' ';
+				}
+				std::cout << std::endl;
 			}
-			else if(midifile[track][i].isNoteOff()){
+			else if(midifile[track][event].isNoteOff()){
 				command = 0;
+				for(int i = 0; i < midifile[track][event].size(); i++){
+					std::cout << std::hex << (int)midifile[track][event][i] << ' ';
+				}
+				std::cout << std::endl;
 			}
-			else{break;}
+			else{command = 2;}
 
 			std::cout << "note status: " << command << std::endl;
 		}		
