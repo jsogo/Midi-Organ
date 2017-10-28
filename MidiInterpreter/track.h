@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <vector>
+#include <string>
 
 namespace midi{
 
@@ -13,8 +14,7 @@ class Parser{
 		int command [2];				
 	} ;
 	
-	std::vector<processed_midi> readMidi(); 
-	void startTiming();	
+	void readMidi(std::string& filename); 
 };
 
 }

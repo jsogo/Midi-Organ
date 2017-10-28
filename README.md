@@ -12,7 +12,7 @@ We are implementing support for a CLI (command line interface), and a web interf
 =======
 2. You probably want to recompile the C++ code, if you're not using gcc-6.3 for the Pi -- in this case you'll 
    also need to recompile the midi parsing library, from `git clone https://github.com/craigsapp/midifile`
-   (for our code, run `g++ -std=c++11 -o midiorgan main.cpp iohandler.cpp timing.cpp track.cpp`)
+   (for our code, run `g++ -std=c++11 -o midiorgan main.cpp iohandler.cpp timing.cpp track.cpp -L../libs/ -lmidifile -I../include`) 
 3. You'll probably want to add the command to your PATH variables, or we might just have it run from the web
 
 ### Web Server Setup

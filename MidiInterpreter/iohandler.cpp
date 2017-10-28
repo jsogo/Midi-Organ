@@ -14,10 +14,10 @@ void IOHandler::start(){
 	std::string input;
 	std::getline(std::cin, input);
 	std::stringstream(input) >> filename;
-	std::cout << filename << "is being read";
+	std::cout << filename << "is being read" << std::endl;
 
-	Track track;
-	track.readMidi(filename);
+	Parser parser;
+	parser.readMidi(filename);
 }
 
 }

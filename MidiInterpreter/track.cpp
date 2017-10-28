@@ -4,21 +4,31 @@
 #include <MidiFile.h>
 #include <Options.h>
 #include <vector>
+#include <iostream>
 
 namespace midi {
 
-	std::vector<processed_midi> Parser::readMidi(std::string& filename){
-		
-	}
-	
-	void Parser::startTiming(){
-		std::vector<processed_midi> p_midis;
-		for(int i = 0; i < p_midis.size(); ++i){
-			p_midis[i].delta_t = std::chrono::nanoseconds(10000);
-			p_midis[i].command[0] = 1;
-			p_midis[i].command[0] = 1;
+	void Parser::readMidi(std::string& filename){
+		MidiFile midifile;
+		midifile.read(filename);
+
+		std::cout << "trying to do the thing" << std::endl;
+		if(!midifile.status()){
+			std::cerr << "Error reading MIDI file " << filename << std::endl;	
 		}
-	
-		Timing timing(p_midis);
+		midifile.joinTracks();
+		int track = 0;
+		for(int i = 0; i < midifile[track].size(); i++){
+			int command;
+			if(midifile[track][i].isNoteOn()){
+				command = 1;
+			}
+			else if(midifile[track][i].isNoteOff()){
+				command = 0;
+			}
+			else{break;}
+
+			std::cout << "note status: " << command << std::endl;
+		}		
 	}
 }
