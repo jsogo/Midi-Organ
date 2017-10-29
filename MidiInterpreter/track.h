@@ -10,7 +10,7 @@ namespace midi{
 class Parser{
 	public:
 	struct processed_midi {
-		std::chrono::nanoseconds delta_t;
+		double delta_t;
 		int command [2];				
 	} ;
 	
