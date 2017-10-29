@@ -16,14 +16,31 @@
     </div>
   
     <div class="ui container left aligned segment" style="margin-top:50px;">
-      <h2 class="ui header" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;" >Currently Playing: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-      dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-      non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h2>
+      <h2 class="ui header" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;" >
+        <span id="song-title"></span>
+        <button class="ui right floated red button" onclick="skip()">Skip</button>
+        <button class="ui right floated green button" onclick="restart()">Restart</button>
+      </h2>
+      <h3 class="ui header" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Song Duration:&nbsp;
+        <span id="song-length"></span>
+      </h3>
     </div>
     
-    <div class="ui container segment" style="margin-top:50px;">
-      
+    <div class="ui container left aligned segment" style="margin-top:50px;">
+      <h2 class="ui header">Song Queue:&nbsp;<span id="num-songs"></span></h2>
+      <div class="ui divider"></div>
+      <div id ="queue">
+      </div>
+      <span class="ui header">Request a song:&nbsp;</span>
+      <select class="ui search dropdown">
+        <option value="default">Select a Song</option>
+        {{#each songs}}
+        <option value="{{title}}">{{title}}</option>
+        {{/each}}
+      </select>
+      <button id="add-button" class="ui right floated blue disabled button" onclick="add()">
+        Add to Queue
+      </button>
     </div>
 
   
@@ -46,3 +63,5 @@
     </div>
   </div>
 </div>
+
+<script src="/javascripts/organ.js"></script>
