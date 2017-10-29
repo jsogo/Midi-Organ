@@ -3,16 +3,15 @@
 
 #include "track.h"
 #include <vector>
+#include <unordered_map>
 
 namespace midi{
 
 class Timing{
 
 	public:
-	Timing(std::vector<Parser::processed_midi>& p_midis);
-	virtual ~Timing() = default;
 
-	void playSong(std::vector<Parser::processed_midi>& p_midis);
+	void playSong(std::unordered_map<double, std::vector< std::vector<int> >> gpio_data, std::vector<double> time_data);
 };
 
 }
