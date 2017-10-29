@@ -16,7 +16,7 @@
     </div>
   
     <div class="ui container left aligned segment" style="margin-top:50px;">
-      <h2 class="ui header" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;" >Currently Playing:&nbsp;
+      <h2 class="ui header" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;" >
         <span id="song-title"></span>
         <button class="ui right floated red button" onclick="skip()">Skip</button>
         <button class="ui right floated green button" onclick="restart()">Restart</button>
@@ -30,20 +30,13 @@
       <h2 class="ui header">Song Queue:&nbsp;<span id="num-songs"></span></h2>
       <div class="ui divider"></div>
       <div id ="queue">
-        <h2 class="ui header" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
-          Title:&nbsp;<span id="queue-title-1"></span>
-          <button class="ui right floated red button" onclick="remove_song(1)">Remove from Queue</button>
-          <br>
-          Length:&nbsp;
-          <span id="queue-length-1"></span>
-        </h2>
-      <div class="ui divider"></div>
       </div>
       <span class="ui header">Request a song:&nbsp;</span>
       <select class="ui search dropdown">
         <option value="default">Select a Song</option>
-        <option value="One">We are Number One</option>
-        <option value="Choice2">Other song choice</option>
+        {{#each songs}}
+        <option value="{{title}}">{{title}}</option>
+        {{/each}}
       </select>
       <button id="add-button" class="ui right floated blue disabled button" onclick="add()">
         Add to Queue

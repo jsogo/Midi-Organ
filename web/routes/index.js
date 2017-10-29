@@ -16,11 +16,12 @@ router.get('/terminal', function(req, res, next) {
 
 /* GET organ page. */
 router.get('/organ', function(req, res, next) {
-  res.render('organ', {title: 'Pi Organ'});
+  res.render('organ', {title: 'Pi Organ', songs: settings.songs});
 });
 
 /* GET queue data */
 router.get('/organ/queue', function(req,res, next) {
+  console.log(req.connection.remoteAddress);
   var Queue = player.getQueue();
   var Current = player.getCurrent();
   res.send({ message: "Success", queue: Queue, current: Current });

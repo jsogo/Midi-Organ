@@ -1,5 +1,27 @@
-// takes a song duration in seconds
-function Time(duration) {
+var queue = null;
+var current = null;
+
+const songTitleElem = $('#song-title');
+const numSongsElem = $('#num-songs');
+const queueElem = $('#queue');
+const songLengthElem = $('#song-length');
+
+var appendQueue = function(song, i) {
+  var html = `
+        <h2 class="ui header" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
+          Title:&nbsp;<span id="queue-title-${i}">${song['title']}</span>
+          <button class="ui right floated red button" onclick="remove_song(${i})">Remove from Queue</button>
+          <br>
+          Length:&nbsp;
+            <span id="queue-length-1">${new Time(song['length']).toString()}</span>
+        </h2>
+        <div class="ui divider"></div>
+        `
+
+  queueElem.append(html);
+};
+
+function Time(duration) {  //duration in seconds
   this.hours = Math.floor(duration/3600);
   this.minutes = Math.floor((duration/60) % 60);
   this.seconds = duration % 60
@@ -35,6 +57,58 @@ function Time(duration) {
 }
 
 
+var getQueue = function() {
+  //get queue from AJAX and perform some updates
+  return $.ajax({
+    url:"/organ/queue",
+    method:"GET",
+    data:null,
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.error("Failed to Retrieve Queue from server");
+    },
+    success: function(data, textStatus, jqXHR) {
+      //populate with data
+      queue = data['queue'];        //TODO: UPDATE HBS FROM SETTINGS SONGS, UPDATE TIMING FOR CURRENT SONG
+      current = data['current'];
+      if (current) {
+        songTitleElem.text("Currently Playing: " + current['title']);
+      } else {
+        songTitleElem.text("No song currently playing");
+      }
+      if (queue.length === 1) {
+        numSongsElem.text('1 song');
+      } else {
+        numSongsElem.text( ''+ queue.length +' songs');
+      }
+
+      //clear queue
+      queueElem.text(' ');
+      for (var i = 0; i < queue.length; i++) {
+        appendQueue(queue[i], i);
+      }
+    }
+  });
+}
+
+var timer = function (data) { //data is the stuff sent in the res.send
+      var i = 0;
+      var elapsed = new Time(0);
+      var duration = new Time(current['length']);
+      var song;
+      songLengthElem.text(elapsed.toString() + "/" + duration.toString());
+      var update = function () {
+        songLengthElem.text(elapsed.toString() + "/" + duration.toString());
+        i++;
+        elapsed.setLength(i);
+        if (i > current['length']) {
+          clearInterval(song);
+          //trigger another update after a second of waiting
+          
+        }
+      }
+      song = setInterval(update, 1000);
+  };
+
 var add = function () {
   console.log("Added");
 };
@@ -48,20 +122,12 @@ var restart = function () {
   console.log("current song restarted");
 };
 
-$(document).ready(function() {
-  $('#song-title').text("Song Name");
-  var length = 79;
-  var i = 0;
-  var elapsed = new Time(0);
-  var duration = new Time(length);
-  $('#song-length').text(elapsed.toString() + "/" + duration.toString());
-  var update = function() {
-    $('#song-length').text(elapsed.toString() + "/" + duration.toString());
-    i++;
-    elapsed.setLength(i);
-  }
 
-  var song = setInterval(update, 1000);
+$(document).ready(function() {
+  getQueue()
+  .then(timer);
+
+
 
   $('select.dropdown').dropdown({
     onChange: function (text, value) {
@@ -75,13 +141,4 @@ $(document).ready(function() {
       $('select.dropdown').dropdown('set selected', value);
     }
   });
-
-
-  $('#queue-length-1').text("1:45");
-  $('#queue-title-1').text("Canon in D");
-  $('#num-songs').text('1 song');
-  // remove_song(num)
-  // add()
-  // skip()
-  // restart()
 });
