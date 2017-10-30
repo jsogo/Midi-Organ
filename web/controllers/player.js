@@ -2,7 +2,7 @@ const settings = require("../settings");
 const fs = require('fs');
 let exec = require('child_process').exec;
 
-var currentSong = settings.songs['song5'];
+var currentSong = settings.songs['song2'];
 var songQueue = [settings.songs['song1'], settings.songs['song3'], settings.songs['song4'], settings.songs['song2']];
 var currentProcess = null;
 
@@ -57,18 +57,21 @@ getNextSong = function() {
 };
 
 module.exports.add = function(songName) {
-  var song = settings.songs[name];
+  var song = settings.songs[songName];
   if (song) {
-    songQueue.push(song);
+    if (currentSong) {
+      songQueue.push(song);
+    } else {
+      currentSong = song;
+    }
     console.log("Added a new song to the queue");
   }
 };
 
-module.exports.remove = function(position) {
+module.exports.remove = function (songIndex) {
   if (songIndex >= 0 && songIndex < songQueue.length) {
     songQueue.splice(songIndex,1);
-    res.send({ message: "Success" }); //also send update queue information
-    console.log("Removed a song at " + position);
+    console.log("Removed a song at " + songIndex);
   }
 };
 

@@ -18,8 +18,8 @@
     <div class="ui container left aligned segment" style="margin-top:50px;">
       <h2 class="ui header" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;" >
         <span id="song-title"></span>
-        <button class="ui right floated red button" onclick="skip()">Skip</button>
-        <button class="ui right floated green button" onclick="restart()">Restart</button>
+        <button class="ui right floated red button" id="skip">Skip</button>
+        <button class="ui right floated green button" id="restart">Restart</button>
       </h2>
       <h3 class="ui header" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">Song Duration:&nbsp;
         <span id="song-length"></span>
@@ -32,15 +32,17 @@
       <div id ="queue">
       </div>
       <span class="ui header">Request a song:&nbsp;</span>
-      <select class="ui search dropdown">
-        <option value="default">Select a Song</option>
-        {{#each songs}}
-        <option value="{{title}}">{{title}}</option>
-        {{/each}}
-      </select>
-      <button id="add-button" class="ui right floated blue disabled button" onclick="add()">
-        Add to Queue
-      </button>
+      <form>
+        <select id="songChoice" class="ui search dropdown">
+          <option value="default">Select a Song</option>
+          {{#each songs}}
+            <option value="{{title}}">{{title}}</option>
+          {{/each}}
+        </select>
+        <button type="submit" id="add-button" class="ui right floated blue disabled button">
+          Add to Queue
+        </button>
+      </form>
     </div>
 
   
@@ -63,5 +65,8 @@
     </div>
   </div>
 </div>
-
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  
+</script>
 <script src="/javascripts/organ.js"></script>

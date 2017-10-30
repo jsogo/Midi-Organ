@@ -19,41 +19,6 @@ router.get('/organ', function(req, res, next) {
   res.render('organ', {title: 'Pi Organ', songs: settings.songs});
 });
 
-/* GET queue data */
-router.get('/organ/queue', function(req,res, next) {
-  console.log(req.connection.remoteAddress);
-  var Queue = player.getQueue();
-  var Current = player.getCurrent();
-  res.send({ message: "Success", queue: Queue, current: Current });
-});
-/* POST api requests for the server. */
-router.post('/organ/add',function(req, res, next) {
-  //get the song request from the req.body
-  var songName = req.body.songName;
-  if (settings.songs[songName]) {
-    player.add(songName);
-    res.send({ message: "Success", queue: player.getQueue(), current: player.getCurrent() });
-  } else {
-    res.send({ message: "Invalid Name", queue: player.getQueue(), current: player.getCurrent() }); 
-  }
-});
-router.post('/organ/remove', function (req, res, next) {
-  var songIndex = req.body.songIndex;
-  if (songIndex >= 0 && songIndex < player.queueLength()) {
-    player.add(songIndex);
-    res.send({ message: "Success", queue: player.getQueue(), current: player.getCurrent() }); 
-  } else {
-    res.send({ message: "Invalid Index", queue: player.getQueue(), current: player.getCurrent() });
-  }
-});
-router.post('/organ/restart', function (req, res, next) {
-  player.restart();
-  res.send({ message: "Success", queue: player.getQueue(), current: player.getCurrent() });
-});
-router.post('/organ/skip', function (req, res, next) {
-  player.skip();
-  res.send({ message: "Success", queue: player.getQueue(), current: player.getCurrent() });
-});
 /* GET links page. */
 router.get('/links', function(req, res, next) {
   res.render('links', {title:"Awesome Links"});
