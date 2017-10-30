@@ -4,15 +4,12 @@
 #include <chrono>
 #include <vector>
 #include <string>
+#include <unordered_map>
 
 namespace midi{
 
 class Parser{
 	public:
-	struct processed_midi {
-		double delta_t;
-		int command [2];				
-	} ;
 	
 	void readMidi(std::string& filename); 
 };

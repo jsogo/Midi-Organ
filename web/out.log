@@ -1,0 +1,30 @@
+
+> web@0.0.0 start /home/pi/Midi-Organ/web
+> node ./bin/www
+
+[0mGET /organ [32m200 [0m336.848 ms - 3244[0m
+[0mGET /stylesheets/style.css [32m200 [0m21.325 ms - 1648[0m
+[0mGET /javascripts/organ.js [32m200 [0m25.987 ms - 3965[0m
+[0mGET /semantic/semantic.min.js [32m200 [0m21.771 ms - 283536[0m
+[0mGET /semantic/semantic.min.css [32m200 [0m22.037 ms - 566635[0m
+::ffff:18.189.14.32
+[0mGET /organ/queue [32m200 [0m7.295 ms - 288[0m
+[0mGET /images/icon.png [32m200 [0m2.371 ms - 17646[0m
+[0mGET / [36m304 [0m23.420 ms - -[0m
+[0mGET /semantic/semantic.min.css [36m304 [0m9.016 ms - -[0m
+[0mGET /semantic/semantic.min.js [36m304 [0m9.229 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m9.216 ms - -[0m
+[0mGET /javascripts/index.js [32m200 [0m3.099 ms - 646[0m
+[0mGET /images/next205.svg [32m200 [0m3.261 ms - 22266[0m
+[0mGET /semantic/themes/default/assets/fonts/icons.woff2 [32m200 [0m3.660 ms - 77160[0m
+[0mGET /terminal [36m304 [0m17.403 ms - -[0m
+[0mGET /semantic/semantic.min.css [36m304 [0m6.831 ms - -[0m
+[0mGET /semantic/semantic.min.js [36m304 [0m6.601 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m6.744 ms - -[0m
+[0mGET /organ [36m304 [0m36.299 ms - -[0m
+[0mGET /semantic/semantic.min.css [36m304 [0m4.848 ms - -[0m
+[0mGET /semantic/semantic.min.js [36m304 [0m4.573 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m2.174 ms - -[0m
+[0mGET /javascripts/organ.js [36m304 [0m2.273 ms - -[0m
+::ffff:18.189.14.32
+[0mGET /organ/queue [36m304 [0m3.580 ms - -[0m

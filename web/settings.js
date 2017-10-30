@@ -1,5 +1,5 @@
 module.exports = {
-  port:3000,
+  port:80,
   songs: {
     'song1': { title: "song1", path: "/dev/null", length: 59 },
     'song2': { title: "song2", path: "/dev/null", length: 40 },
