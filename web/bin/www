@@ -30,7 +30,6 @@ var server = http.createServer(app);
 
 var io = require('socket.io')(server);
 
-
 io.on('connection', function (socket) {
 
   //check when people connect and disconnect to the server
@@ -76,8 +75,14 @@ io.on('connection', function (socket) {
   socket.on('get updates', function () {
     var Queue = player.getQueue();
     var Current = player.getCurrent();
-    socket.emit('update', { queue: Queue, current: Current });
+    io.emit('update', { queue: Queue, current: Current });
   });
+
+  player.on('change', function() {
+    var Queue = player.getQueue();
+    var Current = player.getCurrent();
+    io.emit('update', { queue: Queue, current: Current });
+  })
 });
 
 /**

@@ -22,7 +22,7 @@ var executor = function() {
   //Attempt to find song 
     songPath =currentSong.path;
     command = settings.scriptPath + " " + songPath;
-    command = "/home/alvareza/Desktop/tail"; //testing on angel's pc
+    //command = "/home/alvareza/Desktop/tail"; //testing on angel's pc
     console.log("Executing: " + command);
     try {
       var child = execFile(command, (err, stdout, sterr) => {
@@ -75,7 +75,19 @@ var handler = function(skip=false, restart=false, msg='') {
       currentProcess = executor();
     }
   }
+  changeEmitter.emit('change');
 }
+
+const EventEmitter = require('events');
+
+class ChangeEmitter extends EventEmitter {}
+
+const changeEmitter = new ChangeEmitter();
+
+module.exports.on = function(event, callback) {
+  changeEmitter.on(event, callback);
+}
+
 
 module.exports.add = function(songName) {
   push(songName);
