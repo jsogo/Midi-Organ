@@ -9,8 +9,6 @@ const changeEmitter = new ChangeEmitter();
 var songQueue = [];
 //this is alot more about checking to start a new play process
 var currentSong = null;
-
-
 // play: Takes a song object and creates a promise around it, that wraps a child process which plays its argument. calls cbs after song done or error.
 
 const handler = function() {
@@ -20,9 +18,19 @@ const handler = function() {
   }
 }
 
-const nextSong = function(code) {
+const nextSong = function(msg) {
+  if (msg) {
+    console.log(msg);
+  }
+  if (msg === 'reset') {
+    //the current song is already being played
+    play(currentSong)
+      .then(nextSong)
+      .catch(errorHandler);
+    changeEmitter.emit('change');
+  }
   //this handler is only called if the play promise has ended so we can make some assumptions.
-  if (songQueue.length > 0) {
+  else if (songQueue.length > 0) {
     var song = pop();
     currentSong = song;
     //there has been a change in state of the Queue. 
@@ -50,39 +58,45 @@ const play = function(songObject) {
   return new Promise((resolve, reject) => {
     songPath = songObject.path;
     command = settings.scriptPath + " " + songPath;
-    command = "/home/alvareza/Desktop/tail"; //testing on angel's pc
+    //command = "/home/alvareza/Desktop/tail"; //testing on angel's pc
     console.log("PLAYER: Executing command: " + command);
 
     var child = spawn(command);
-
     //Add listeners for child process
     child.stdout.on('data', function (data) {
-      console.log(data);
+      console.log(data.toString());
     });
     child.stderr.on('data', function (data) {
       child.kill();
-      reject(data);
+      reject(data.toString());
     });
     child.on('error', function (err) {
       child.kill();
       reject(err);
     });
-    child.on('close', function (code) {
-      resolve(code);
+    child.on('exit', function (code, signal) {
+      if (!signal) {
+        //Process ended gracefully
+        resolve(code);
+      }
     });
     //Add listeners for events on changeEvent
-    changeEmitter.on('reset',() => {
+    var reseter = function() {
       child.kill();
-      //instantiate new child until process comes to end, recursively.
-      //TODO FIX THIS NOW
-      play(songObject)
-      .then(resolve)
-      .catch(reject);
-    });
-    changeEmitter.on('skip', () => {
+      changeEmitter.removeListener('reset', reseter);
+      //console.log(changeEmitter.listenerCount('reset'));   //BUG: LISTENERS ARE ALL REMOVED, BUT GET CALLED A bunch of times?
+      resolve('reset');
+    }
+    var skipper = function () {
       child.kill();
+      changeEmitter.removeListener('skip', skipper);
+      //console.log(changeEmitter.listenerCount('skip'));   //BUG: LISTENERS ARE ALL REMOVED, BUT GET CALLED A bunch of times?
       resolve('Skipped current song');
-    });
+    }
+
+    changeEmitter.on('reset', reseter);
+
+    changeEmitter.on('skip', skipper);
   });
 }
 
@@ -138,66 +152,3 @@ module.exports.on = function (event, callback) {
   changeEmitter.on(event, callback);
 };
 
-/*
-
-
-var executor = function() {
-    songPath =currentSong.path;
-    command = settings.scriptPath + " " + songPath;
-    command = "/home/alvareza/Desktop/tail"; //testing on angel's pc
-    console.log("EXECUTOR: Executing command: " + command);
-    try {
-      var child = spawn(command);
-
-      child.stdout.on('data', function(data) {
-        handler(false, false, data);
-      });
-      child.stderr.on('data', function(data) {
-        handler(true, false, data);
-      });
-      child.on('error', function(err) {
-        handler(true, false, "ERROR:" + command + " Finished with error: " + err);
-      });
-      child.on('close', function (code) {
-        handler(true, false, "" + command + " Process finished with exit code: " + code);
-      });
-
-      return child;
-    } catch (err) {
-      console.log(err);
-      handler(true, false, "Could not play " + currentSong.title + ". " + err);
-      return null;
-    }
-};
-//current song will only be put up IFF there is literally a song playing
-var handler = function(skip=false, restart=false, msg='') {
-  if (msg) {
-    console.log("HANDLER: " + msg);
-  }
-  if (skip) {
-    currentSong = null;
-    if (currentProcess) {
-      currentProcess.kill();
-    }
-  }
-
-  if (currentSong) {
-    if (restart) {
-      if (currentProcess) {
-        currentProcess.kill();
-      }
-      currentProcess = executor();
-    }
-  } else {
-    if (songQueue.length > 0) {
-      currentSong = pop();
-      console.log("HANDLER: Now Playing: " + currentSong.title);
-      if (currentProcess) {
-        currentProcess.kill();
-      }
-      currentProcess = executor();
-    }
-  }
-  changeEmitter.emit('change');
-}
-*/
