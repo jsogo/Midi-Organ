@@ -10,7 +10,7 @@ var songQueue = [];
 //this is alot more about checking to start a new play process
 var currentSong = null;
 // play: Takes a song object and creates a promise around it, that wraps a child process which plays its argument. calls cbs after song done or error.
-
+var startTime = Date.now();
 const handler = function() {
   //This function knows what's up. check if there is a current song playing, if so then nothing, otherwise, call nextSong
   if (!currentSong) {
@@ -58,10 +58,12 @@ const play = function(songObject) {
   return new Promise((resolve, reject) => {
     songPath = songObject.path;
     command = settings.scriptPath + " " + songPath;
-    //command = "/home/alvareza/Desktop/tail"; //testing on angel's pc
+    command = "/home/alvareza/Desktop/tail"; //testing on angel's pc
     console.log("PLAYER: Executing command: " + command);
 
     var child = spawn(command);
+    //start the timer
+    startTime = Date.now();
     //Add listeners for child process
     child.stdout.on('data', function (data) {
       console.log(data.toString());
@@ -108,6 +110,11 @@ const push = function(songName) {
 }
 const pop = function() {
   return songQueue.shift();
+}
+
+module.exports.time = function() {
+  deltaT = Date.now() - startTime;
+  return deltaT;
 }
 
 module.exports.add = function(songName) {

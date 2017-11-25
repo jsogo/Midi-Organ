@@ -46,7 +46,7 @@ io.on('connection', function (socket) {
       //ask everyone to update.
       var Queue = player.getQueue();
       var Current = player.getCurrent();
-      io.emit('update', { queue: Queue, current: Current });
+      io.emit('update', { queue: Queue, current: Current, time: player.time() });
     }
   });
   socket.on('remove song', function (songIndex) {
@@ -55,7 +55,7 @@ io.on('connection', function (socket) {
       //ask everyone to update.
       var Queue = player.getQueue();
       var Current = player.getCurrent();
-      io.emit('update', { queue: Queue, current: Current });
+      io.emit('update', { queue: Queue, current: Current, time: player.time() });
 
     }
   });
@@ -63,25 +63,25 @@ io.on('connection', function (socket) {
     player.skip();//ask everyone to update.
     var Queue = player.getQueue();
     var Current = player.getCurrent();
-    io.emit('update', { queue: Queue, current: Current });
+    io.emit('update', { queue: Queue, current: Current, time: player.time() });
   });
   socket.on('restart', function () {
     player.restart();//ask everyone to update.
     var Queue = player.getQueue();
     var Current = player.getCurrent();
-    io.emit('update', { queue: Queue, current: Current });
+    io.emit('update', { queue: Queue, current: Current, time: player.time() });
   });
   //page initially asks for updates
   socket.on('get updates', function () {
     var Queue = player.getQueue();
     var Current = player.getCurrent();
-    io.emit('update', { queue: Queue, current: Current });
+    io.emit('update', { queue: Queue, current: Current, time: player.time() });
   });
 
   player.on('change', function() {
     var Queue = player.getQueue();
     var Current = player.getCurrent();
-    io.emit('update', { queue: Queue, current: Current });
+    io.emit('update', { queue: Queue, current: Current, time: player.time() });
   })
 });
 
