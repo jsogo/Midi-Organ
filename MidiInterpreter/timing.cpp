@@ -19,6 +19,10 @@ void Timing::playSong(std::unordered_map<double, std::vector< std::vector<int> >
 			{64, "E4"}, {65, "F4"}, {66, "Fs4"}, {67, "G4"}, {68, "Gs4"}, {69, "A5"}, {70, "As5"},
 			{71, "B5"}, {72, "C5"}, {73, "Cs5"}, {74, "D5"}
 			};
+	std::unordered_map<std::string, int> pinsmap = {
+			{"D3", 1}, {"Ds3", 2}, {"E3", 3}, {"F3", 4}, {"Fs3", 5}, {"G3", 6}, {"Gs3", 7},
+			{"A4", 8}, {"As4", 9}, {"B4", 10}
+			};
 	for(unsigned i = 0; i < time.size(); ++i){
 		std::this_thread::sleep_for(std::chrono::duration<double>(time[i]-prev_time));
 		prev_time = time[i];
@@ -28,6 +32,7 @@ void Timing::playSong(std::unordered_map<double, std::vector< std::vector<int> >
 			std::cout << "time " << i << " signal " << signal << " note " << notesmap.at(note) << std::endl;
 		}		
 	}
+	std::cout << "finished" << std::endl;
 }
 
 }
