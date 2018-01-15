@@ -7,5 +7,5 @@ module.exports = {
     'song4': { title: "song4", path: "/dev/null", length: 98 },
     'song5': { title: "song5", path: "/dev/null", length: 123 },
   },
-  scriptPath: "../MidiInterpreter/midiorgan "
+  scriptPath: "../MidiInterpreter/midiorgan"
 };

@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  var timer = new Timer();
+
   var socket = io();
   $('form').submit(function() {
     console.log('submitted a ' + $('#songChoice').dropdown('get value'));
@@ -12,6 +14,11 @@ $(document).ready(function() {
   socket.on('update', function(data) {
     queue = data['queue'];        //TODO: UPDATE HBS FROM SETTINGS SONGS, UPDATE TIMING FOR CURRENT SONG
     current = data['current'];
+    
+    timer.end();
+    if (current) {
+      timer.start(data);
+    }
     if (current) {
       songTitleElem.text("Currently Playing: " + current['title']);
     } else {
@@ -102,28 +109,46 @@ $(document).ready(function() {
     }
   }
 
+//this should 
+function Timer() {
+  var i;
+  var elapsed;
+  var duration;
+  var song;
+  var current;
 
-  var timer = function (data) { //data is the stuff sent in the res.send
-    return new Promise((resolve, reject) => {
-      var i = 0;
-      var elapsed = new Time(0);
-      var duration = new Time(current['length']);
-      var song;
+  var update = function () {
+    songLengthElem.text(elapsed.toString() + "/" + duration.toString());
+    i++;
+
+    elapsed.setLength(i);
+    if (i > current['length']) {
+       //trigger an update?
+       console.log('song should have ended')
+       clearInterval(song); 
+    }
+  }
+
+  this.start = function(data) {
+    if (data['current']) {
+      current = data['current']
+      i = 0;
+      elapsed = new Time(Math.floor(data['time'] / 1000));
+      duration = new Time(current['length']);
       songLengthElem.text(elapsed.toString() + "/" + duration.toString());
-      var update = function () {
-        songLengthElem.text(elapsed.toString() + "/" + duration.toString());
-        i++;
-        elapsed.setLength(i);
-        if (i > current['length']) {
-          clearInterval(song);
-          //trigger another update after a second of waiting
-          resolve();
-        }
-      }
-      song = setInterval(update, 1000);
-    });
-  };
 
+      song = setInterval(update, 1000);
+    } else {
+      songLengthElem.text('');
+    }
+  };
+  this.end = function() {
+    if (song) {
+      clearInterval(song);
+    }
+    songLengthElem.text('');
+  };
+};
 
   $('select.dropdown').dropdown({
     onChange: function (text, value) {
