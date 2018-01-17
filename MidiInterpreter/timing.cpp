@@ -29,12 +29,13 @@ void Timing::playSong(std::unordered_map<double, std::vector< std::vector<int> >
 			{64, "E4"}, {65, "F4"}, {66, "Fs4"}, {67, "G4"}, {68, "Gs4"}, {69, "A5"}, {70, "As5"},
 			{71, "B5"}, {72, "C5"}, {73, "Cs5"}, {74, "D5"}
 			};
+
 	std::unordered_map<int, int> pinsmap = {
 			{50, 0}, {51, 1}, {52, 2}, {53, 3}, {54, 4}, {55,5}, {56, 6}, {57, 7}, {58, 10}, {59, 9},
 			{60, 8}, {61, 11}, {62, 12}, {63, 13}, {64, 14}, {65, 15}, {66, 16}, {67, 21}, {68, 22}, {69, 23},
 			{70, 24}, {71, 25}, {72, 26}, {73, 27}, {74, 28}
 			};
-	
+
 	for(unsigned i = 0; i < time.size(); ++i){
 		std::this_thread::sleep_for(std::chrono::duration<double>(time[i]-prev_time));
 		prev_time = time[i];
@@ -59,6 +60,7 @@ void Timing::playSong(std::unordered_map<double, std::vector< std::vector<int> >
 	for(int i = 21; i < 29; ++i){
 		digitalWrite(i, HIGH);
 	}
+	std::cout << "finished" << std::endl;
 }
 
 }

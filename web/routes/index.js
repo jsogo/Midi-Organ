@@ -31,7 +31,20 @@ router.get('/about', function (req, res, next) {
 router.get('/contact', function (req, res, next) {
   res.render('contact', { title: "Contact Us" });
 });
-
+var currentIP = '';
+/* GET PI GLOVE DATA */
+router.get('/glove', function(req, res, next) {
+  res.send(currentIP);
+});
+router.post('/glove', function(req, res, next) {
+  console.log(req.query);
+  if (req.query.newIP) {
+    currentIP = req.query.newIP;
+    res.send('success');
+  } else {
+    res.send('failed');
+  }
+});
 
 
 module.exports = router;
