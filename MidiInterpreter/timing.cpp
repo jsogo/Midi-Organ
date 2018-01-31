@@ -15,6 +15,7 @@ void Timing::playSong(std::unordered_map<double, std::vector< std::vector<int> >
 	double prev_time = 0;
 	wiringPiSetup();
 	
+
 	//initialize pins
 	for(int i = 0; i < 17; ++i){
 		pinMode(i, OUTPUT);
@@ -22,6 +23,11 @@ void Timing::playSong(std::unordered_map<double, std::vector< std::vector<int> >
 	for(int i = 21; i < 29; ++i){
 		pinMode(i, OUTPUT);
 	}
+
+	std::cout << softPwmCreate(25, 0, 100);
+
+	softPwmWrite(50,100);
+	std::this_thread::sleep_for(std::chrono::duration<double>(3));
 
 	std::unordered_map<int, std::string> notesmap = {
 			{50, "D3"}, {51, "Ds3"}, {52, "E3"}, {53, "F3"}, {54, "Fs3"}, {55, "G3"}, {56, "Gs3"},
@@ -33,7 +39,7 @@ void Timing::playSong(std::unordered_map<double, std::vector< std::vector<int> >
 	std::unordered_map<int, int> pinsmap = {
 			{50, 0}, {51, 1}, {52, 2}, {53, 3}, {54, 4}, {55,5}, {56, 6}, {57, 7}, {58, 10}, {59, 9},
 			{60, 8}, {61, 11}, {62, 12}, {63, 13}, {64, 14}, {65, 15}, {66, 16}, {67, 21}, {68, 22}, {69, 23},
-			{70, 24}, {71, 25}, {72, 26}, {73, 27}, {74, 28}
+			{70, 24}, {71, 29}, {72, 26}, {73, 27}, {74, 28}
 			};
 
 	for(unsigned i = 0; i < time.size(); ++i){
