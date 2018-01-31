@@ -58,7 +58,7 @@ void Timing::playSong(std::unordered_map<double, std::vector< std::vector<int> >
 		digitalWrite(i, LOW);
 	}
 	for(int i = 21; i < 29; ++i){
-		digitalWrite(i, HIGH);
+		digitalWrite(i, LOW);
 	}
 	std::cout << "finished" << std::endl;
 }
