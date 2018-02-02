@@ -26,8 +26,8 @@ void Timing::playSong(std::unordered_map<double, std::vector< std::vector<int> >
 
 	std::cout << softPwmCreate(25, 0, 100);
 
-	softPwmWrite(50,100);
-	std::this_thread::sleep_for(std::chrono::duration<double>(3));
+	softPwmWrite(25,80);
+	std::this_thread::sleep_for(std::chrono::duration<double>(5));
 
 	std::unordered_map<int, std::string> notesmap = {
 			{50, "D3"}, {51, "Ds3"}, {52, "E3"}, {53, "F3"}, {54, "Fs3"}, {55, "G3"}, {56, "Gs3"},
@@ -66,6 +66,7 @@ void Timing::playSong(std::unordered_map<double, std::vector< std::vector<int> >
 	for(int i = 21; i < 29; ++i){
 		digitalWrite(i, LOW);
 	}
+	softPwmWrite(25,0);
 	std::cout << "finished" << std::endl;
 }
 
