@@ -70,16 +70,6 @@ namespace midi {
 
 		std::cout << "total time: " << time_data[time_data.size() - 1] << std::endl;
 
-		/*for(int i = 0; i < time_data.size(); i++){
-			std::cout << "time is " <<  time_data[i] << ' ';
-			for(int j = 0; j < gpio_data.at(time_data[i]).size(); j++){
-				for(int k = 0; k < 2; k++){
-					std::cout << "...event: " << gpio_data.at(time_data[i])[j][k] << ' ';
-				}
-			}
-			std::cout << std::endl;
-		}*/
-
 		Timing timing;
 		timing.playSong(gpio_data, time_data);
 	}

@@ -58,10 +58,9 @@ const play = function(songObject) {
   return new Promise((resolve, reject) => {
     songPath = songObject.path;
     command = settings.scriptPath + " " + songPath;
-    command = "/home/alvareza/Desktop/tail"; //testing on angel's pc
     console.log("PLAYER: Executing command: " + command);
 
-    var child = spawn(command);
+    var child = spawn(settings.scriptPath, [songPath]);
     //start the timer
     startTime = Date.now();
     //Add listeners for child process

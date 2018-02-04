@@ -1,11 +1,13 @@
 module.exports = {
   port:80,
   songs: {
-    'song1': { title: "song1", path: "/dev/null", length: 59 },
-    'song2': { title: "song2", path: "/dev/null", length: 40 },
-    'song3': { title: "song3", path: "/dev/null", length: 130 },
-    'song4': { title: "song4", path: "/dev/null", length: 98 },
-    'song5': { title: "song5", path: "/dev/null", length: 123 },
-  },
-  scriptPath: "../MidiInterpreter/midiorgan"
+	'Die Forrelle': { title: "Die Forrelle", path: "/home/pi/Midi-Organ/midi/Organ\ Midi/Die\ Forrelle.mid"},
+	'Ode to Joy': { title: "Ode to Joy", path: "/home/pi/Midi-Organ/midi/Organ\ Midi/Ode\ to\ Joy.mid", length: 65 },
+	'Wachet Auf': { title: "Wachet Auf", path: "/home/pi/Midi-Organ/midi/Organ\ Midi/Wachet\ Auf.mid", length: 232 },
+	'Jupiter, the Bringer of Jollity': { title: "Jupiter, the Bringer of Jollity", path: "/home/pi/Midi-Organ/midi/Organ\ Midi/Jupiter,\ the\ Bringer\ of\ Jollity.mid", length: 65 },
+	'Promenade': { title: "Promenade", path: "/home/pi/Midi-Organ/midi/Organ\ Midi/Promenade.mid", length: 90 },
+	'Mario Overworld Theme': { title: "Mario Overworld Theme", path: "/home/pi/Midi-Organ/midi/Organ\ Midi/Mario\ Overworld\ Theme.mid", length: 125 },
+	'The Old Castle': { title: "The Old Castle", path: "/home/pi/Midi-Organ/midi/Organ\ Midi/The\ Old\ Castle.mid", length: 165 },
+},
+  scriptPath: "/home/pi/Midi-Organ/MidiInterpreter/midiorgan"
 };
