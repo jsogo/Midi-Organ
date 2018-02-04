@@ -20,7 +20,7 @@ void Timing::playSong(std::unordered_map<double, std::vector< std::vector<int> >
 	for(int i = 0; i < 17; ++i){
 		pinMode(i, OUTPUT);
 	}
-	for(int i = 21; i < 29; ++i){
+	for(int i = 21; i <= 29; ++i){
 		pinMode(i, OUTPUT);
 	}
 
@@ -37,11 +37,15 @@ void Timing::playSong(std::unordered_map<double, std::vector< std::vector<int> >
 			};
 
 	std::unordered_map<int, int> pinsmap = {
-			{50, 0}, {51, 1}, {52, 2}, {53, 3}, {54, 4}, {55,5}, {56, 6}, {57, 7}, {58, 10}, {59, 9},
-			{60, 8}, {61, 11}, {62, 12}, {63, 13}, {64, 14}, {65, 15}, {66, 16}, {67, 21}, {68, 22}, {69, 23},
-			{70, 24}, {71, 29}, {72, 26}, {73, 27}, {74, 28}
+	                {50, 29}, {51, 28}, {52, 26}, {53, 27}, {54, 11}, {55,16}, {56, 15}, {57, 10}, {58, 5}, {59, 6},
+			{60, 0}, {61, 2}, {62, 1}, {63, 4}, {64, 8}, {65, 7}, {66, 9}, {67, 14}, {68, 13}, {69, 12},
+			{70, 21}, {71, 22}, {72, 23}, {73, 24}, {74, 3}
 			};
+//std::cout << softPwmCreate(25, 0, 100);
 
+	//softPwmWrite(25,100);
+	std::this_thread::sleep_for(std::chrono::duration<double>(3));
+			
 	for(unsigned i = 0; i < time.size(); ++i){
 		std::this_thread::sleep_for(std::chrono::duration<double>(time[i]-prev_time));
 		prev_time = time[i];
@@ -63,7 +67,7 @@ void Timing::playSong(std::unordered_map<double, std::vector< std::vector<int> >
 	for(int i = 0; i < 17; ++i){
 		digitalWrite(i, LOW);
 	}
-	for(int i = 21; i < 29; ++i){
+	for(int i = 21; i <= 29; ++i){
 		digitalWrite(i, LOW);
 	}
 	softPwmWrite(25,0);
