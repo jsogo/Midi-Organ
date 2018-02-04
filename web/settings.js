@@ -9,5 +9,6 @@ module.exports = {
 	'Mario Overworld Theme': { title: "Mario Overworld Theme", path: "/home/pi/Midi-Organ/midi/Organ\ Midi/Mario\ Overworld\ Theme.mid", length: 125 },
 	'The Old Castle': { title: "The Old Castle", path: "/home/pi/Midi-Organ/midi/Organ\ Midi/The\ Old\ Castle.mid", length: 165 },
 },
-  scriptPath: "/home/pi/Midi-Organ/MidiInterpreter/midiorgan"
+  scriptPath: "/home/pi/Midi-Organ/MidiInterpreter/midiorgan",
+  resetPath:  "/home/pi/Midi-Organ/MidiInterpreter/midiorgan"
 };

@@ -63,6 +63,7 @@ const play = function(songObject) {
     var child = spawn(settings.scriptPath, [songPath]);
     //start the timer
     startTime = Date.now();
+    // Add a current time check here TODO =======================================
     //Add listeners for child process
     child.stdout.on('data', function (data) {
       console.log(data.toString());
@@ -84,12 +85,14 @@ const play = function(songObject) {
     //Add listeners for events on changeEvent
     var reseter = function() {
       child.kill();
+      spawn(settings.resetPath);
       changeEmitter.removeListener('reset', reseter);
       //console.log(changeEmitter.listenerCount('reset'));   //BUG: LISTENERS ARE ALL REMOVED, BUT GET CALLED A bunch of times?
       resolve('reset');
     }
     var skipper = function () {
       child.kill();
+      spawn(settings.resetPath);
       changeEmitter.removeListener('skip', skipper);
       //console.log(changeEmitter.listenerCount('skip'));   //BUG: LISTENERS ARE ALL REMOVED, BUT GET CALLED A bunch of times?
       resolve('Skipped current song');
