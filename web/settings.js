@@ -10,5 +10,5 @@ module.exports = {
 	'The Old Castle': { title: "The Old Castle", path: "/home/pi/Midi-Organ/midi/Organ\ Midi/The\ Old\ Castle.mid", length: 165 },
 },
   scriptPath: "/home/pi/Midi-Organ/MidiInterpreter/midiorgan",
-  resetPath:  "/home/pi/Midi-Organ/MidiInterpreter/midiorgan"
+  resetPath:  "/home/pi/Midi-Organ/FlushPins/flush"
 };
