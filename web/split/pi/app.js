@@ -23,6 +23,7 @@ request.post(
   }
 );
 
+app.get('/', function(req, res) { res.send({message: "Hi"})});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
