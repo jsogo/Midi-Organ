@@ -1,6 +1,6 @@
 const settings = require("../settings");
 const fs = require('fs');
-const { spawn } = require('child_process');
+const spawn = require('child_process').spawn;
 const EventEmitter = require('events');
 
 class ChangeEmitter extends EventEmitter { }

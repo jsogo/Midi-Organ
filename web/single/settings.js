@@ -23,7 +23,13 @@ module.exports = {
     'The Incredibles Theme': {length: 163,title: "The Incredibles Theme", path: "/home/pi/Midi-Organ/MidiInterpreter/pieces/The_Incredibles_.mid"},
     'The Old Castle': {length: 160,title: "The Old Castle", path: "/home/pi/Midi-Organ/MidiInterpreter/pieces/The\ Old\ Castle.mid"},
     'Wachet Auf': {length: 227,title: "Wachet Auf", path: "/home/pi/Midi-Organ/MidiInterpreter/pieces/Wachet\ Auf.mid"},
-    'The Can Can': {length: 113, title: "The Can Can", path: "/home/pi/Midi-Organ/MidiInterpreter/pieces/Can_Can.mid"}
+    'The Can Can': {length: 113, title: "The Can Can", path: "/home/pi/Midi-Organ/MidiInterpreter/pieces/Can_Can.mid"},
+    'Mii Channel': {length: 195, title: "Mii Channel", path: "/home/pi/Midi-Organ/MidiInterpreter/pieces/Mii\ Channel.mid"},
+    'Anitra\'s Dance': {length: 200, title:"Anitra\'s Dance", path:"/home/pi/Midi-Organ/MidiInterpreter/pieces/Anitra\'s\ Dance.mid"},
+    'Saturn, the Bringer of Old Age':{length: 470, title:"Saturn, the Bringer of Old Age", path:"/home/pi/Midi-Organ/MidiInterpreter/pieces/Saturn,\ the\ Bringer\ of\ Old\ Age.mid"},
+    'Morning Mood':{length: 170, title: "Morning Mood",path:"/home/pi/Midi-Organ/MidiInterpreter/pieces/Morning\ Mood.mid"},
+    'Ase\'s Death':{length: 215, title: "Ase\'s Death",path:"/home/pi/Midi-Organ/MidiInterpreter/pieces/Ase\'s\ Death.mid"},
+    'In the Hall of the Mountain King':{length: 130, title: "In the Hall of the Mountain King",path:"/home/pi/Midi-Organ/MidiInterpreter/pieces/In\ the\ Hall\ of\ the\ Mountain\ King.mid"}
   },
   scriptPath: "/home/pi/Midi-Organ/MidiInterpreter/midiorgan",
   resetPath:  "/home/pi/Midi-Organ/FlushPins/flush"
